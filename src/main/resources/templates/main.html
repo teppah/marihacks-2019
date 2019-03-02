@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Put your stuff here</title>
-    <script th:src="static/main.js" src="/static/main.js"></script>
+	<title></title>
+
+	<style type="text/css">
+	#myCanvas{
+		border: 1px solid black;
+	}	
+	</style>
+
 </head>
 <body>
-<h1>Hello!</h1>
-<!--Put your stuff here-->
-<script>
+	<canvas id="myCanvas" width="600px" height="400px">
+		
+	</canvas>
 
-    greet();
-</script>
+	<script type="text/javascript">
+		
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext("2d");
+
+		var i;
+		var j;
+
+		ctx.lineWidth = "1";
+		ctx.strokeStyle = "grey";
+
+		for (i=0;i<4;i++){
+			for (j=0;j<6;j++){
+				ctx.rect(20+j*80, 20+i*80, 50, 50)
+			}
+		}
+
+		ctx.stroke()
+
+
+	</script>
+
 </body>
 </html>
