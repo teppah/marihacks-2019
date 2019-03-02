@@ -1,117 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Local</title>
+    <title>Local</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-	<style type="text/css">
+    <style type="text/css">
 
-	* {
+        * {
 
-		font-family: Helvetica;
-	}
+            font-family: Helvetica;
+        }
 
-	#myCanvas{
-		border: .1px solid #d1d1d1;
-		margin-top:20px;
-		padding-left: 0;
-		padding-right: 0;
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-	}	
+        #myCanvas {
+            border: .1px solid #d1d1d1;
+            margin-top: 20px;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
 
-	#content{
-		padding:20px;
-	}
+        #content {
+            padding: 20px;
+        }
 
-	</style>
+    </style>
 
-	<link rel="icon" href="Lots of Cars.png">
+    <link rel="icon" href="Lots of Cars.png">
 
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" href="#">LoCal</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-	    <div class="navbar-nav">
-	      <a class="nav-item nav-link" href="#">About</a>
-	      <a class="nav-item nav-link" href="#">General Simulator</a>
-	      <a class="nav-item nav-link" href="#">Personal Simulator</a>
-	    </div>
-	  </div>
-	</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">LoCal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#">About</a>
+            <a class="nav-item nav-link" href="#">General Simulator</a>
+            <a class="nav-item nav-link" href="#">Personal Simulator</a>
+        </div>
+    </div>
+</nav>
 
-	<div id="content">
+<div id="content">
 
-		<center><h1>Overall Simulator</h1></center>
+    <h1>Overall Simulator</h1>
 
-		<canvas id="myCanvas" width="1000px" height="500px">
-			
-		</canvas>
-
-		<script type="text/javascript">
-			
-			var canvas = document.getElementById('myCanvas');
-			var ctx = canvas.getContext("2d");
+    <canvas id="myCanvas" width="1000px" height="500px">
 
 
-			var i;
-			var j;
+    </canvas>
+    <script type="text/javascript">
 
-			ctx.lineWidth = "0.5";
-			ctx.strokeStyle = "#ffca60";
-
-			// draws map
-			function run_simulation(){
-				// alert("Testing the setInterval method!")
-				$.ajax({
-				  url: "api/grid",
-				  data: "data",
-				  success: function(data){
-
-				  },
-				  dataType: "dataType"
-				})
-			};
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext("2d");
 
 
+        ctx.lineWidth = "0.5";
+        ctx.strokeStyle = "#ffca60";
 
-			for (i=0;i<4;i++){
-				for (j=0;j<6;j++){
-					ctx.fillStyle = "#fff3db";
-					ctx.fillRect(20+j*80, 20+i*80, 50, 50);
-					ctx.rect(20+j*80, 20+i*80, 50, 50);
-				}
-			}
+        // draws map
+        function getData() {
+            $.get("api/grid", function (data, status) {
+                for (let i = 0; i < 20; i++) {
+                    for (let j = 0; j < 40; j++) {
+                        let currObj = data[j][i];
+                        if (currObj.type === "building") {
+                            ctx.fillStyle = "#000e56";
+                        } else {
+                            ctx.fillStyle = "#fff3db";
+                        }
+                        ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.stroke();
+                    }
 
-			ctx.stroke()
-
-			// run function
-			function run_simulation(){
-				// alert("Testing the setInterval method!")
-				$.ajax({
-				  url: "url",
-				  data: "data",
-				  success: "success",
-				  dataType: "dataType"
-				});
-
-			}
-
-			setInterval(run_simulation, 1000)
+                }
+            });
+        }
 
 
-		</script>
-	</div>
+    </script>
+    <button class="btn btn-primary" onclick="getData()">Get Data</button>
+</div>
 
 </body>
 </html>
