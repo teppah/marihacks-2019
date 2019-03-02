@@ -2,24 +2,29 @@ package com.yfy.hx.lotsofcars.core;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 public class Car extends AbstractEntity {
-    public Facing facing;
+public String uuid;
 
-    public Car() {
+public Facing facing;
+
+public Car() {
         super("car");
-    }
+        facing = Facing.NORTH;
+        }
 
-    public Car(Facing facing) {
+public Car(Facing facing) {
         super("car");
         this.facing = facing;
-    }
+        }
 
-    public enum Facing {
-        NORTH,
-        EAST,
-        WEST,
-        SOUTH
-    }
+public enum Facing {
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH
+}
 }
 

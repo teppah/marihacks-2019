@@ -41,10 +41,10 @@ public class LotsOfCarsApplication {
             return new Building();
         } else {
             Road road = new Road();
-            if (r.nextDouble() < 0.2) {
-                road.currentCar = new Car(Car.Facing.NORTH);
-                road.currentCar.facing = Car.Facing.NORTH;
-            }
+//            if (r.nextDouble() < 0.2) {
+//                road.currentCar = new Car(Car.Facing.NORTH);
+//                road.currentCar.facing = Car.Facing.NORTH;
+//            }
             return road;
         }
     }
