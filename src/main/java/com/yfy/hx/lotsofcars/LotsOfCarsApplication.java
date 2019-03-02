@@ -37,12 +37,15 @@ public class LotsOfCarsApplication {
     private AbstractEntity generateRandom() {
         double val = r.nextDouble();
 
-        if (val < 0.33) {
+        if (val < 0.5) {
             return new Building();
-        } else if (val >= 0.33 && val < 0.67) {
-            return new Road();
         } else {
-            return new Car();
+            Road road = new Road();
+            if (r.nextDouble() < 0.2) {
+                road.currentCar = new Car(Car.Facing.NORTH);
+                road.currentCar.facing = Car.Facing.NORTH;
+            }
+            return road;
         }
     }
 
