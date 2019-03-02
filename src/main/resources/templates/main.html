@@ -63,6 +63,7 @@
 			var canvas = document.getElementById('myCanvas');
 			var ctx = canvas.getContext("2d");
 
+
 			var i;
 			var j;
 
@@ -70,6 +71,19 @@
 			ctx.strokeStyle = "#ffca60";
 
 			// draws map
+			function run_simulation(){
+				// alert("Testing the setInterval method!")
+				$.ajax({
+				  url: "api/grid",
+				  data: "data",
+				  success: function(data){
+
+				  },
+				  dataType: "dataType"
+				})
+			};
+
+
 
 			for (i=0;i<4;i++){
 				for (j=0;j<6;j++){
