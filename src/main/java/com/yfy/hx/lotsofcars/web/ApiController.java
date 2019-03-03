@@ -44,18 +44,10 @@ public class ApiController {
     }
 
 
-//need to finish this
-    // @GetMapping("api/get-position")
-    // public AbstractEntity getPosition(@RequestParam String uuid) {
-        
-    //     if (uuid != null) {
-            
-
-    //         return grid.get();
-    //     }
-
-    //     return null;
-    // }
+    @GetMapping("api/get-car")
+    public Car getCar(@RequestParam String uuid) {
+        return grid.findCar(uuid);
+    }
 
     @GetMapping("api/get-new-car")
     public Car getNewCar() {

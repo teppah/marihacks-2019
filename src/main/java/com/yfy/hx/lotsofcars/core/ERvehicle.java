@@ -5,26 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
-public class ERvehicle extends AbstractEntity {
-public String uuid;
+public class ERvehicle extends Car {
 
-public Facing facing;
+    public ERvehicle() {
+        super("ervehicle");
+    }
 
-public ERvehicle() {
-        super("ERvehicle");
-        facing = Facing.NORTH;
-        }
+    public ERvehicle(Facing facing) {
+        super(facing);
+    }
 
-public ERvehicle(Facing facing) {
-        super("ERvehicle");
-        this.facing = facing;
-        }
 
-public enum Facing {
-    NORTH,
-    EAST,
-    WEST,
-    SOUTH
-}
 }
 
