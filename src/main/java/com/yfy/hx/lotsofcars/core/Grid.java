@@ -48,14 +48,12 @@ public class Grid {
         return grid[x][y];
     }
 
-<<<<<<< HEAD
     // public ArrayList getPosition(String uuid) {
 
     //     return []
     // }
 
 
-=======
     public Car findCar(String uuid) {
         for (AbstractEntity[] en1 : grid) {
             for (AbstractEntity e: en1) {
@@ -70,7 +68,6 @@ public class Grid {
 
         return null;
     }
->>>>>>> 02b63a9de11f8faf59a392d0450874723da3b89b
 
     public void addCar(Car car) {
         while (true) {
