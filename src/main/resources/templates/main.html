@@ -66,23 +66,31 @@
     </canvas>
     <script type="text/javascript">
 
-        var canvas = document.getElementById('myCanvas');
-        var ctx = canvas.getContext("2d");
+        let localCurrentCar = null;
+
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext("2d");
 
 
         ctx.lineWidth = "0.5";
         ctx.strokeStyle = "#ffca60";
 
         // draws map
-        let getData = function() {
+        let getData = function () {
             $.get("api/grid", function (data, status) {
                 for (let i = 0; i < 20; i++) {
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#000e56";
+                            ctx.fillStyle = "#000000";
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
-                            ctx.fillStyle = "#7CFC00";
+                            if (currObj.currentCar.uuid === localCurrentCar.uuid) {
+                                // if car displayed is the local car
+                                ctx.fillStyle = "#7CFC00";
+                            } else {
+
+                                ctx.fillStyle = "#0011ff";
+                            }
                         } else if (currObj.type === "road" && currObj.currentER != null) {
                             ctx.fillStyle = "#FF0000";
                         } else {
@@ -98,23 +106,30 @@
             });
         };
 
-        let resetGrid = function() {
+        let resetGrid = function () {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         };
 
-        let updateGrid = function() {
+        let updateGrid = function () {
             resetGrid();
             getData();
         };
 
-        let getNewCar = function() {
-            $.get("api/get-new-car", function (data, status) {
-                updateGrid();
-                $("#uuidField").innerHTML = data.uuid;
-            })
+        let getNewCar = function () {
+            if (localCurrentCar === null) {
+                $.get("api/get-new-car", function (data, status) {
+                    localCurrentCar = data;
+                    alert(`Got new car: uuid is ${localCurrentCar.uuid}`);
+                    updateGrid();
+                    $("#uuidField").innerHTML = data.uuid;
+                })
+            } else {
+                alert(`you already have a car with uuid ${localCurrentCar.uuid}`)
+            }
+
         };
 
-        let getNewER = function() {
+        let getNewER = function () {
             $.get("api/get-new-ER", function (data, status) {
                 updateGrid();
             })
@@ -122,24 +137,24 @@
 
         //Added functionality to move the car
 
-        let moveCarLeft = function() {
+        let moveCarLeft = function () {
 
-        	updateGrid();
+            updateGrid();
         };
 
-        let moveCarRight = function() {
+        let moveCarRight = function () {
 
-        	updateGrid();
+            updateGrid();
         };
 
-        let moveCarUp = function() {
+        let moveCarUp = function () {
 
-        	updateGrid();
+            updateGrid();
         };
 
-        let moveCarDown = function() {
+        let moveCarDown = function () {
 
-        	updateGrid();
+            updateGrid();
         };
 
     </script>
@@ -153,7 +168,7 @@
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
     <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
-    
+
 
 </div>
 
