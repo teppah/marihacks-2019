@@ -88,16 +88,24 @@
                             ctx.fillStyle = "#82c0ff";
                             ctx.lineWidth = "1";
 					        ctx.strokeStyle = "#f9f9f9";
-                            ctx.rect(5 + j * 20, 5 + i * 20, 19, 19);
+                            // ctx.rect(5 + j * 20, 5 + i * 20, 19, 19);
 	                        ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
+                            ctx.fillStyle = "#000e56";
+                        } else if (currObj.type === "road" && currObj.currentCar != null) {
+                            ctx.fillStyle = "#7CFC00";
+	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+
+                        } else if (currObj.type === "road" && currObj.currentER != null) {
+                            ctx.fillStyle = "#FF0000";
+	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
                         } else {
-                            ctx.fillStyle = "#f9f9f9";
+                            ctx.fillStyle = "#edf9ff";
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
 
                         }
-                        // ctx.rect(5 + j * 20, 5 + i * 20, 20, 20);
+                        // ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
                     }
 
                 }
@@ -134,22 +142,22 @@
 
         let moveCarLeft = function() {
 
-            updateGrid();
+        	updateGrid();
         };
 
         let moveCarRight = function() {
 
-            updateGrid();
+        	updateGrid();
         };
 
         let moveCarUp = function() {
 
-            updateGrid();
+        	updateGrid();
         };
 
         let moveCarDown = function() {
 
-            updateGrid();
+        	updateGrid();
         };
 
     </script>
@@ -163,6 +171,8 @@
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
     <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
+    
+
 </div>
 
 </body>

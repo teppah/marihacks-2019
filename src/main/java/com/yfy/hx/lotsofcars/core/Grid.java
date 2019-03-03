@@ -50,6 +50,13 @@ public class Grid {
         return grid[x][y];
     }
 
+    // public ArrayList getPosition(String uuid) {
+
+    //     return []
+    // }
+
+
+
     public void addCar(Car car) {
         while (true) {
             int x = r.nextInt(gridWidth);
