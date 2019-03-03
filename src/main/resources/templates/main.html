@@ -60,7 +60,7 @@
 
     <h1>Overall Simulator</h1>
 
-    <canvas id="myCanvas" width="1000px" height="500px">
+    <canvas id="myCanvas" width="830px" height="430px">
 
 
     </canvas>
@@ -99,36 +99,32 @@
                                         // if car displayed is the local car
                                         // console.log("current car");
                                         ctx.fillStyle = "#7CFC00";
-	                                    ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
 
                                     } else {
                                         // console.log("other car");
                                         ctx.fillStyle = "#0011ff";
-                                        ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
-
                                     }
                                 }
                                 // if its an erv
                                 else if (currObj.currentCar.type === "ervehicle") {
                                     // console.log("ervehicle");
                                     ctx.fillStyle = "#FF0000";
-                                    ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
-
-
                                 }
+                                ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
+
                             } else {
                                 // console.log("nothing");
-                                ctx.fillStyle = "#fcfcfc"
+                                ctx.fillStyle = "#fcfcfc";
                                 ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
                             }
 
 
                         }
-                        // ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
                     }
 
                 }
+
                 ctx.stroke();
 
 
