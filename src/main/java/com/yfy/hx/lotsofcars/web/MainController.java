@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController  {
 
+    @GetMapping("")
+    public String default_landing_page(){
+        return "landing";
+    }
+
     @GetMapping("home")
     public String hello() {
         return "main";
