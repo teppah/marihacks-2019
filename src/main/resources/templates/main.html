@@ -56,7 +56,7 @@
     </div>
 </nav>
 
-<div id="content">
+<div id="content" align="center">
 
     <h1>Overall Simulator</h1>
 
@@ -74,15 +74,18 @@
         ctx.strokeStyle = "#ffca60";
 
         // draws map
-        function getData() {
+        let getData = function() {
             $.get("api/grid", function (data, status) {
                 for (let i = 0; i < 20; i++) {
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
                             ctx.fillStyle = "#000e56";
+                        } else if (currObj.type === "road" && currObj.currentCar != null) {
+                            ctx.fillStyle = "#cc0022";
                         } else {
                             ctx.fillStyle = "#fff3db";
+
                         }
                         ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
                         ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
@@ -91,11 +94,30 @@
 
                 }
             });
-        }
+        };
 
+        let resetGrid = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        let updateGrid = function() {
+            resetGrid();
+            getData();
+        };
+
+        let getNewCar = function() {
+            $.get("api/get-new", function (data, status) {
+                updateGrid();
+                $("#uuidField").innerHTML = data.uuid;
+            })
+        };
 
     </script>
-    <button class="btn btn-primary" onclick="getData()">Get Data</button>
+    <h3>Id is: </h3>
+    <h4 id="uuidField">placeholder</h4>
+    <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
+    <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
+    <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
 </div>
 
 </body>
