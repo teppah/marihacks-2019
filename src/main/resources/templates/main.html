@@ -91,18 +91,24 @@
 
                                 ctx.fillStyle = "#0011ff";
                             }
+                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
+
                         } else if (currObj.type === "road" && currObj.currentER != null) {
                             ctx.fillStyle = "#FF0000";
+                            ctx.fillRect(5 + j * 20 + 2, 5 + i * 20 + 2, 16, 16);
+
                         } else {
                             ctx.fillStyle = "#fff3db";
+                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
+
 
                         }
-                        ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
-                        ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
-                        ctx.stroke();
+                        // ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
                     }
 
                 }
+                ctx.stroke();
+
             });
         };
 
