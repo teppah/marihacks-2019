@@ -49,7 +49,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="landing">About</a>
+            <a class="nav-item nav-link" href="">About</a>
             <a class="nav-item nav-link" href="Car">Car Simulator</a>
             <a class="nav-item nav-link" href="ER">ER Simulator</a>
         </div>
@@ -79,40 +79,45 @@
                 for (let i = 0; i < 20; i++) {
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
+                        //building
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#f4c292";
-                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
+                            ctx.fillStyle = "#000000";
+                            console.log("building")
+                        }
+                        // road
+                        else if (currObj.type === "road") {
+                            console.log("road");
 
-                        } else if (currObj.type === "road" && currObj.currentCar != null) {	// if there is a car
-                        	alert("Car")
-                            // ctx.fillStyle = "#82c0ff";
-                            // ctx.lineWidth = "1";
-					        ctx.strokeStyle = "#f9f9f9";
-                            // ctx.rect(5 + j * 20, 5 + i * 20, 19, 19);
-                            ctx.fillStyle = "#000e56";
-	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+                            // if its a car
+                            if (currObj.currentCar !== null) {
+                                if (currObj.currentCar.type === "car") {
+                                    if (currObj.currentCar.uuid === localCurrentCar.uuid) {
+                                        // if car displayed is the local car
+                                        console.log("current car");
+                                        ctx.fillStyle = "#7CFC00";
+                                    } else {
+                                        console.log("other car");
+                                        ctx.fillStyle = "#0011ff";
+                                    }
+                                }
+                                // if its an erv
+                                else if (currObj.currentCar.type === "ervehicle") {
+                                    console.log("ervehicle");
+                                    ctx.fillStyle = "#FF0000";
 
-                        } else if (currObj.type === "road" && currObj.currentCar != null) {
-                            ctx.fillStyle = "#7CFC00";
-	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
-
-                        } else if (currObj.type === "road" && currObj.currentER != null) {
-                            ctx.fillStyle = "#FF0000";
-	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
-                        } else {
-                            ctx.fillStyle = "#f9f9f9";
-                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
-
+                                }
+                            } else {
+                                console.log("nothing");
+                                ctx.fillStyle = "#fff3db"
+                            }
 
                         }
-                        // ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.stroke();
                     }
-
                 }
-
-                ctx.stroke();
-
-            });
+            })
         };
 
         let resetGrid = function() {
@@ -140,26 +145,7 @@
 
         //Added functionality to move the car
 
-<<<<<<< HEAD
-        let moveCarLeft = function() {
 
-        	updateGrid();
-        };
-
-        let moveCarRight = function() {
-
-        	updateGrid();
-        };
-
-        let moveCarUp = function() {
-
-        	updateGrid();
-        };
-
-        let moveCarDown = function() {
-
-        	updateGrid();
-=======
         let moveCarLeft = function () {
             if (localCurrentCar !== null) {
                 $.get(`api/move-car?x=${localCurrentCar.x}&y=${localCurrentCar.y}&direction=left`, function (data) {
@@ -206,7 +192,6 @@
             } else {
                 alert("No car");
             }
->>>>>>> cea799ae3ee437cf96bb33035367f58ef627b2e6
         };
 
     </script>
@@ -218,15 +203,10 @@
     <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
-<<<<<<< HEAD
-    <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
-    <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
-    
-=======
+
     <button class="btn btn-primary" onclick="moveCarUp()">Move downwards</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move upwards</button>
 
->>>>>>> cea799ae3ee437cf96bb33035367f58ef627b2e6
 
 </div>
 
