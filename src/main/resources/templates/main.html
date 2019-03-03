@@ -82,7 +82,7 @@
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#000000";
+                            ctx.fillStyle = "#ffe5bc";
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
                             if (currObj.currentCar.uuid === localCurrentCar.uuid) {
                                 // if car displayed is the local car
@@ -98,7 +98,7 @@
                             ctx.fillRect(5 + j * 20 + 2, 5 + i * 20 + 2, 16, 16);
 
                         } else {
-                            ctx.fillStyle = "#fff3db";
+                            ctx.fillStyle = "#edf9ff";
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
 
