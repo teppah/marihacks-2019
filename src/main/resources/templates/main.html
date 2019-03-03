@@ -138,24 +138,51 @@
         //Added functionality to move the car
 
         let moveCarLeft = function () {
+            if (localCurrentCar !== null) {
+                $.get(`api/move-car?x=${localCurrentCar.x}&y=${localCurrentCar.y}&direction=left`, function (data) {
+                    localCurrentCar = data;
+                    updateGrid();
+                });
 
-
-            updateGrid();
+            } else {
+                alert("No car");
+            }
         };
 
         let moveCarRight = function () {
+            if (localCurrentCar !== null) {
+                $.get(`api/move-car?x=${localCurrentCar.x}&y=${localCurrentCar.y}&direction=right`, function (data) {
+                    localCurrentCar = data;
+                    updateGrid();
+                });
 
-            updateGrid();
+            } else {
+                alert("No car");
+            }
         };
 
         let moveCarUp = function () {
+            if (localCurrentCar !== null) {
+                $.get(`api/move-car?x=${localCurrentCar.x}&y=${localCurrentCar.y}&direction=up`, function (data) {
+                    localCurrentCar = data;
+                    updateGrid();
+                });
 
-            updateGrid();
+            } else {
+                alert("No car");
+            }
         };
 
         let moveCarDown = function () {
+            if (localCurrentCar !== null) {
+                $.get(`api/move-car?x=${localCurrentCar.x}&y=${localCurrentCar.y}&direction=down`, function (data) {
+                    localCurrentCar = data;
+                    updateGrid();
+                });
 
-            updateGrid();
+            } else {
+                alert("No car");
+            }
         };
 
     </script>
@@ -167,8 +194,8 @@
     <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
-    <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
-    <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
+    <button class="btn btn-primary" onclick="moveCarUp()">Move downwards</button>
+    <button class="btn btn-primary" onclick="moveCarDown()">Move upwards</button>
 
 
 </div>

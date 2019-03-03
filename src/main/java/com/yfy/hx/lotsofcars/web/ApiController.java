@@ -50,19 +50,56 @@ public class ApiController {
     }
 
     @GetMapping("api/move-car")
-    public Car moveCar(@RequestParam String uuid,
+    public Car moveCar(@RequestParam Integer x,
+                       @RequestParam Integer y,
                        @RequestParam String direction) {
-        Car car = grid.findCar(uuid);
-        if (grid.grid[car.x][car.y] instanceof Road) {
-            Road r = (Road) grid.grid[car.x][car.y];
-            if (r.currentCar != null) {
-                r.currentCar = null;
-                switch (direction) {
+        AbstractEntity currentRoad = grid.get(x, y);
+        log.info("thing at x {} y {}", currentRoad.x, currentRoad.y);
+        log.info("it is is {}", grid.grid[currentRoad.x][currentRoad.y]);
 
+        Car currentCar = null;
+        if (currentRoad instanceof Road) {
+            Road r = (Road) currentRoad;
+            int newX = currentRoad.x;
+            int newY = currentRoad.y;
+            log.info("old x={}, old y={}", currentRoad.x, currentRoad.y);
+            if (r.currentCar != null) {
+                currentCar = r.currentCar;
+                switch (direction) {
+                    case "up":
+                        log.info("up");
+                        newY++;
+                        break;
+                    case "down":
+                        log.info("down");
+                        newY--;
+                        break;
+                    case "left":
+                        log.info("left");
+                        newX--;
+                        break;
+                    case "right":
+                        log.info("right");
+                        newX++;
+                        break;
+                }
+                log.info("new x={}, new y={}", newX, newY);
+                if (grid.grid[newX][newY] instanceof Road) {
+                    Road newRoad = (Road) grid.grid[newX][newY];
+                    if (newRoad.currentCar == null) {
+                        r.currentCar = null;
+                        newRoad.currentCar = currentCar;
+                        currentRoad.x = newX;
+                        currentRoad.y = newY;
+
+                        currentCar.x = newX;
+                        currentCar.y = newY;
+                        log.info("car now has motion");
+                    }
                 }
             }
         }
-        return null;
+        return currentCar;
     }
 
 
@@ -81,7 +118,6 @@ public class ApiController {
         grid.addCar(ervehicle);
         return ervehicle;
     }
-
 
 
 }
