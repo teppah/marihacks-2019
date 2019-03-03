@@ -132,6 +132,7 @@ public class ApiController {
     @GetMapping("api/reset-grid")
     public void resetGrid() {
         grid.reset();
+        this.alerted = false;
         log.info("reset grid");
     }
 
