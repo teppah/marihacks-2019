@@ -50,8 +50,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="">About</a>
-            <a class="nav-item nav-link" href="Car">Car Simulator</a>
-            <a class="nav-item nav-link" href="ER">ER Simulator</a>
+            <a class="nav-item nav-link" href="car">Car Simulator</a>
+            <a class="nav-item nav-link" href="er">ER Simulator</a>
         </div>
     </div>
 </nav>
@@ -127,20 +127,6 @@
             getData();
         };
 
-        let getNewCar = function () {
-            // if (localCurrentCar === null) {
-            //     $.get("api/get-new-car", function (data, status) {
-            //         localCurrentCar = data;
-            //         alert(`Got new car: uuid is ${localCurrentCar.uuid}`);
-            //         updateGrid();
-            //         $("#uuidField").innerHTML = data.uuid;
-            //     })
-            // } else {
-            //     alert(`you already have a car with uuid ${localCurrentCar.uuid}`)
-            // }
-
-        };
-
         let getNewER = function () {
             if (localCurrentER === null) {
                 $.get("api/get-new-ER", function (data, status) {
@@ -209,7 +195,6 @@
     <h4 id="uuidField">placeholder</h4>
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
-    <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
     <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>

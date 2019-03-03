@@ -6,6 +6,7 @@ import com.yfy.hx.lotsofcars.core.ERvehicle;
 import com.yfy.hx.lotsofcars.core.Grid;
 import com.yfy.hx.lotsofcars.core.Road;
 import com.yfy.hx.lotsofcars.core.Building;
+import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,29 +51,30 @@ public class ApiController {
     }
 
     @GetMapping("api/move-car")
+    @Synchronized
     public Car moveCar(@RequestParam Integer x,
                        @RequestParam Integer y,
                        @RequestParam String direction) {
         AbstractEntity currentRoad = grid.get(x, y);
-        log.info("thing at x {} y {}", currentRoad.x, currentRoad.y);
-        log.info("it is is {}", grid.grid[currentRoad.x][currentRoad.y]);
+//        log.info("thing at x {} y {}", currentRoad.x, currentRoad.y);
+//        log.info("it is is {}", grid.grid[currentRoad.x][currentRoad.y]);
 
         Car currentCar = null;
         if (currentRoad instanceof Road) {
             Road r = (Road) currentRoad;
             int newX = currentRoad.x;
             int newY = currentRoad.y;
-            log.info("old x={}, old y={}", currentRoad.x, currentRoad.y);
+//            log.info("old x={}, old y={}", currentRoad.x, currentRoad.y);
             if (r.currentCar != null) {
                 currentCar = r.currentCar;
                 switch (direction) {
                     case "up":
                         log.info("up");
-                        newY++;
+                        newY--;
                         break;
                     case "down":
                         log.info("down");
-                        newY--;
+                        newY++;
                         break;
                     case "left":
                         log.info("left");
@@ -83,7 +85,7 @@ public class ApiController {
                         newX++;
                         break;
                 }
-                log.info("new x={}, new y={}", newX, newY);
+//                log.info("new x={}, new y={}", newX, newY);
                 if (grid.grid[newX][newY] instanceof Road) {
                     Road newRoad = (Road) grid.grid[newX][newY];
                     if (newRoad.currentCar == null) {
@@ -95,9 +97,15 @@ public class ApiController {
                         currentCar.x = newX;
                         currentCar.y = newY;
                         log.info("car now has motion");
+                    } else {
+                        log.info("there is already a car there: {}", newRoad.currentCar.type);
                     }
                 }
+            } else {
+                log.info("there is no car at location x={} y={}", r.x, r.y);
             }
+        } else {
+            log.info("not a road; it is a {}", currentRoad.type);
         }
         return currentCar;
     }
