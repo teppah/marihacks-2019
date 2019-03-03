@@ -49,6 +49,23 @@ public class ApiController {
         return grid.findCar(uuid);
     }
 
+    @GetMapping("api/move-car")
+    public Car moveCar(@RequestParam String uuid,
+                       @RequestParam String direction) {
+        Car car = grid.findCar(uuid);
+        if (grid.grid[car.x][car.y] instanceof Road) {
+            Road r = (Road) grid.grid[car.x][car.y];
+            if (r.currentCar != null) {
+                r.currentCar = null;
+                switch (direction) {
+
+                }
+            }
+        }
+        return null;
+    }
+
+
     @GetMapping("api/get-new-car")
     public Car getNewCar() {
         Car car = new Car();
@@ -61,7 +78,7 @@ public class ApiController {
     public ERvehicle getNewER() {
         ERvehicle ervehicle = new ERvehicle();
         ervehicle.uuid = new Random().nextInt() + "";
-        grid.addER(ervehicle);
+        grid.addCar(ervehicle);
         return ervehicle;
     }
 
