@@ -12,6 +12,7 @@ public class Grid {
     public AbstractEntity[][] grid = new AbstractEntity[40][20];
 
     public List<Car> cars = new ArrayList<>();
+    public List<ERvehicle> ervehicles = new ArrayList<>();
 
     public static final int gridHeight = 20;
     public static final int gridWidth = 40;
@@ -62,6 +63,27 @@ public class Grid {
                     car.y = y;
                     road.currentCar = car;
                     log.info("added new car {}", car);
+                    log.info("road is at x={} and y={}", road.x, road.y);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    public void addER(ERvehicle ervehicle) {
+        while (true) {
+            int x = r.nextInt(gridWidth);
+            int y = r.nextInt(gridHeight);
+            AbstractEntity ae = grid[x][y];
+            if (ae instanceof Road) {
+                Road road = (Road) ae;
+                if (road.currentER == null) {
+                    ervehicles.add(ervehicle);
+                    ervehicle.x = x;
+                    ervehicle.y = y;
+                    road.currentER = ervehicle;
+                    log.info("added new ervehicle {}", ervehicle);
                     log.info("road is at x={} and y={}", road.x, road.y);
                     break;
                 }

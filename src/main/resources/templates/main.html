@@ -116,10 +116,38 @@
         };
 
         let getNewCar = function() {
-            $.get("api/get-new", function (data, status) {
+            $.get("api/get-new-car", function (data, status) {
                 updateGrid();
                 $("#uuidField").innerHTML = data.uuid;
             })
+        };
+
+        let getNewER = function() {
+            $.get("api/get-new-ER", function (data, status) {
+                updateGrid();
+            })
+        };
+
+        //Added functionality to move the car
+
+        let moveCarLeft = function() {
+
+            updateGrid();
+        };
+
+        let moveCarRight = function() {
+
+            updateGrid();
+        };
+
+        let moveCarUp = function() {
+
+            updateGrid();
+        };
+
+        let moveCarDown = function() {
+
+            updateGrid();
         };
 
     </script>
@@ -128,6 +156,11 @@
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
     <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
+    <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
+    <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
+    <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
+    <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
+    <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
 </div>
 
 </body>

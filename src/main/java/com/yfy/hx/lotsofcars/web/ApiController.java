@@ -3,6 +3,7 @@ package com.yfy.hx.lotsofcars.web;
 import com.yfy.hx.lotsofcars.core.AbstractEntity;
 import com.yfy.hx.lotsofcars.core.Car;
 import com.yfy.hx.lotsofcars.core.Grid;
+import com.yfy.hx.lotsofcars.core.ERvehicle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
