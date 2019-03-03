@@ -26,7 +26,7 @@ public class LotsOfCarsApplication {
         Grid grid = new Grid();
         for (int i = 0; i < Grid.gridWidth; i++) {
             for (int j = 0; j < Grid.gridHeight; j++) {
-                AbstractEntity ae = generateRandom();
+                AbstractEntity ae = generateRandom(i, j);
                 grid.addThing(ae, i, j);
             }
         }
@@ -34,10 +34,11 @@ public class LotsOfCarsApplication {
         return grid;
     }
 
-    private AbstractEntity generateRandom() {
+    private AbstractEntity generateRandom(int i, int j) {
         double val = r.nextDouble();
 
-        if (val < 0.5) {
+        // if (val < 0.5) {
+        if ((i%5)!=0 && (j%5)!=0){
             return new Building();
         } else {
             Road road = new Road();
