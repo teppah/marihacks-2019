@@ -40,12 +40,20 @@ public class ApiController {
         return null;
     }
 
-    @GetMapping("api/get-new")
+    @GetMapping("api/get-new-car")
     public Car getNewCar() {
         Car car = new Car();
         car.uuid = new Random().nextInt() + "";
         grid.addCar(car);
         return car;
+    }
+
+    @GetMapping("api/get-new-ER")
+    public ERvehicle getNewER() {
+        ERvehicle ervehicle = new ERvehicle();
+        ervehicle.uuid = new Random().nextInt() + "";
+        grid.addER(ervehicle);
+        return ervehicle;
     }
 
 
