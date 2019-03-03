@@ -14,8 +14,14 @@
 	<style type="text/css">
 
 	* {
-
+		scroll-behavior: smooth;
 		font-family: Helvetica;
+	}
+
+	.whiteText{
+		color: white;
+		text-align: center;
+		font-size: 30px;
 	}
 
 	#myCanvas{
@@ -30,35 +36,98 @@
 
 	#section1{
 
-		background-image: url(http://www.rxrelief.com/sites/rxrelief.com/files/ThinkstockPhotos-513469649.jpg);
+		background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(https://r.hswstatic.com/w_907/gif/traffic-hotspots.jpg);
 		height: 100vh;
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-attachment: scroll;
+		background-attachment: fixed;
 		background-position: center; 
+		padding:50px;
+
+	}
+
+	#section1headline1{
+		color: white;
+		text-align: center;
+		padding-top: 150px;
+		font-size: 60px;
+		/*padding-right: auto;*/
 
 	}
 
 	#section2{
-		background-color: green;
+
+		background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.99)), url(https://d1ix0byejyn2u7.cloudfront.net/drive/images/uploads/headers/ws_cropper/1_0x0_790x520_0x520_ambulance.jpg);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+		background-position: center; 
 		height: 100vh;
+		padding: 50px;
 	}
+
+	#section3{
+		background: #e5ede3;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+		background-position: center; 
+		height: 100vh;
+		padding: 50px;
+	}
+
+	#section4{
+		background: white;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+		background-position: center; 
+		height: 100vh;
+		padding: 50px;
+		padding-top: 250px;
+	}
+
+	.navbar-default {
+    background-color: rgba(0,0,0,1);
+    border-color: #E7E7E7;
+    color: white;
+}
 
 	</style>
 
 </head>
 <body>
 
+	<nav class="navbar navbar-expand-lg navbar-default navbar-dark">
+	  <a class="navbar-brand" href="#">LoCal</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a class="nav-item nav-link" href="#">About</a>
+	      <a class="nav-item nav-link" href="#">General Simulator</a>
+	      <a class="nav-item nav-link" href="#">Personal Simulator</a>
+	    </div>
+	  </div>
+	</nav>
 
 	<div id="section1">
-		<p style="color: white" <span id="ambulances_percent" class="ambulances_percent">0</span>% of ambulances are late</p>
+		<p id="section1headline1">You spend <b><span id="ambulances_percent">0</span></b> minutes stuck in traffic every year.</p>
+		<p class="whiteText">That is the equivalent of an entire work week!</p>
+		<p style="text-align: center;"><a class="btn btn-outline-light" href="#section2">So, what happens?</a></p>
 
 
 		<script type="text/javascript">
 
-		setTimeout(function(){
-		    ambulances_percent.innerHTML = 70;
-		}, 1000);
+	   var $badge = $('#ambulances_percent'); // cache 
+	   setInterval(function () {
+	        var value = parseInt($badge.html());
+	        if (value<2520){
+		        value+=2;
+		    }
+	        $badge.html(value);
+	   }, .1);
 
 		</script>
 
@@ -66,6 +135,32 @@
 
 
 	<div id="section2">
+		<div class="whiteText" style="padding-top: 100px">
+			<p style="font-size: 70px; ">Precious time is lost.</p>
+				<p style="padding-left:90px; padding-right: 90px;">Time that could be spent working, improving quality of life, allowing emergency vehicles to reach their destinations.</p>
+			<p style="text-align: center;"><a class="btn btn-outline-light" href="#section3">What is the solution?</a></p>
+
+		</div>
+	</div>
+
+	<div id="section3" style="font-size:30px; text-align: center;">
+		<div>
+			<p><div style="font-size: 60px;">Meet <b>LoCal</b>,</div> <div style="font-size: 20px;">a novel approach to alleviate traffic flow.</div></p>
+			<br>
+			<p>LoCal uses intelligent systems to recommend driving directions to commuters.</p>
+			<br>
+			<div style="font-size: 20px;">
+				<p>This way, emergency vehicles can reach their destinations more quickly.</p>
+				<p>Travellers spend less time on the roads</p>
+				<p>Congestion is downgraded.</p>
+			</div>
+			<p style="text-align: center;"><a href="#section4" class="btn btn-outline-dark">Got it!</a></p>
+		</div>
+	</div>
+
+	<div id="section4">
+		<p style="text-align: center" ><a class="btn btn-outline-dark btn-lg"href="#" >Try LoCal</a></p>
+		<p style="text-align: center; color: grey">It doesn't hurt</p>
 	</div>
 
 </body>
