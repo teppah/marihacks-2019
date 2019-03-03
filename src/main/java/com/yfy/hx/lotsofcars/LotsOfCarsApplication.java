@@ -37,19 +37,11 @@ public class LotsOfCarsApplication {
         return grid;
     }
 
-    @Bean 
-    public Grid return_grid_orientation() {
-        Grid road_orientation = new Grid();
-        for (int i = 0; i < Grid.gridWidth; i++) {
-            for (int j = 0; j < Grid.gridHeight; j++) {
-                String orientation;
-                orientation = Grid.return_road_orientation(j, i);       // make sure (j, i) and not (i, j)!!!
-                road_orientation.addThing(orientation, i, j);
-            }
-        }
-
-        return road_orientation;    
-    }
+    // @Bean 
+    // public String[][] return_grid_orientation_LotsOfCarsApplication() {
+    //     OrientationGrid road_orientation = new OrientationGrid(20, 40);
+    //     return road_orientation.return_orientation_grid_complete(5);    
+    // }
 
     private AbstractEntity generateRandom(int i, int j) {
         double val = r.nextDouble();
@@ -80,36 +72,6 @@ public class LotsOfCarsApplication {
         return grid;
     }
 
-        public static String return_road_orientation(int x, int y){
-        /** Function returns road orientation based on x and y coordinates
-        */
-
-        // based on a 5x5 block system
-        if((x%10)==0 && (y%5)!=0){
-            return "down";
-        }
-
-        else if((x%10)==5 && (y%5)!=0){
-            return "up";
-        }
-
-        else if((x%5)!=0 && (y%10)==0){
-            return "left";
-        }
-
-        else if((x%5)!=0 && (y%10)==5){
-            return "right";
-        }
-
-        else if((x%5)==0 && (y%5)==0){
-            return "intersection";
-        }
-
-        else{
-            return "building";
-        }
-
-    }
 
 
 }
