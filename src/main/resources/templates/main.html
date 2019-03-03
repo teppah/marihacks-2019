@@ -84,6 +84,7 @@
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
                         } else if (currObj.type === "road" && currObj.currentCar != null) {	// if there is a car
+                        	alert("Car")
                             ctx.fillStyle = "#82c0ff";
                             ctx.lineWidth = "1";
 					        ctx.strokeStyle = "#f9f9f9";
@@ -116,6 +117,7 @@
         };
 
         let getNewCar = function() {
+        	alert("Get new car!")
             $.get("api/get-new-car", function (data, status) {
                 updateGrid();
                 $("#uuidField").innerHTML = data.uuid;
