@@ -82,30 +82,39 @@
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#000000";
+                            ctx.fillStyle = "#fce3bf";
+                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
+
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
 
                             if (currObj.currentCar.type === "car") {
                                 ctx.fillStyle = "#0011ff";
+                                ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+
                             } else if (currObj.currentCar.type === "ervehicle") {
                                 if (currObj.currentCar.uuid === localCurrentER.uuid) {
                                     ctx.fillStyle = "#b200ff";
+                                    ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+
                                 } else {
                                     ctx.fillStyle = "#FF0000";
+                                    ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+
                                 }
 
 
                             }
                         } else {
-                            ctx.fillStyle = "#fff3db";
+                            ctx.fillStyle = "#fcfcfc";
+                            ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
                         }
-                        ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
-                        ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
-                        ctx.stroke();
+                        // ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
                     }
 
                 }
+                ctx.stroke();
+
             });
         };
 
