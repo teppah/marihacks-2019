@@ -1,16 +1,124 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Put your stuff here</title>
-    <script th:src="static/main.js" src="/static/main.js"></script>
+    <title>Local</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <style type="text/css">
+
+        * {
+
+            font-family: Helvetica;
+        }
+
+        #myCanvas {
+            border: .1px solid #d1d1d1;
+            margin-top: 20px;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        #content {
+            padding: 20px;
+        }
+
+    </style>
+
+    <link rel="icon" href="Lots of Cars.png">
+
+
 </head>
 <body>
-<h1>Hello!</h1>
-<!--Put your stuff here-->
-<script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="landing">LoCal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="landing">About</a>
+            <a class="nav-item nav-link" href="home">General Simulator</a>
+            <a class="nav-item nav-link" href="home">Personal Simulator</a>
+        </div>
+    </div>
+</nav>
 
-    greet();
-</script>
+<div id="content" align="center">
+
+    <h1>Overall Simulator</h1>
+
+    <canvas id="myCanvas" width="1000px" height="500px">
+
+
+    </canvas>
+    <script type="text/javascript">
+
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext("2d");
+
+
+        ctx.lineWidth = "0.5";
+        ctx.strokeStyle = "#ffca60";
+
+        // draws map
+        let getData = function() {
+            $.get("api/grid", function (data, status) {
+                for (let i = 0; i < 20; i++) {
+                    for (let j = 0; j < 40; j++) {
+                        let currObj = data[j][i];
+                        if (currObj.type === "building") {
+                            ctx.fillStyle = "#000e56";
+                        } else if (currObj.type === "road" && currObj.currentCar != null) {
+                            ctx.fillStyle = "#cc0022";
+                        } else {
+                            ctx.fillStyle = "#fff3db";
+
+                        }
+                        ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.rect(5 + j * 20, 5 + i * 20, 13, 13);
+                        ctx.stroke();
+                    }
+
+                }
+            });
+        };
+
+        let resetGrid = function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        let updateGrid = function() {
+            resetGrid();
+            getData();
+        };
+
+        let getNewCar = function() {
+            $.get("api/get-new", function (data, status) {
+                updateGrid();
+                $("#uuidField").innerHTML = data.uuid;
+            })
+        };
+
+    </script>
+    <h3>Id is: </h3>
+    <h4 id="uuidField">placeholder</h4>
+    <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
+    <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
+    <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
+</div>
+
 </body>
 </html>
