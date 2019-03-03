@@ -80,18 +80,18 @@
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#fce9c9";
+                            ctx.fillStyle = "#f4c292";
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
                         } else if (currObj.type === "road" && currObj.currentCar != null) {	// if there is a car
                         	alert("Car")
-                            ctx.fillStyle = "#82c0ff";
-                            ctx.lineWidth = "1";
+                            // ctx.fillStyle = "#82c0ff";
+                            // ctx.lineWidth = "1";
 					        ctx.strokeStyle = "#f9f9f9";
                             // ctx.rect(5 + j * 20, 5 + i * 20, 19, 19);
-	                        ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
-
                             ctx.fillStyle = "#000e56";
+	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
+
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
                             ctx.fillStyle = "#7CFC00";
 	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
@@ -100,7 +100,7 @@
                             ctx.fillStyle = "#FF0000";
 	                        ctx.fillRect(5 + j * 20+2, 5 + i * 20+2, 16, 16);
                         } else {
-                            ctx.fillStyle = "#edf9ff";
+                            ctx.fillStyle = "#f9f9f9";
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
 
