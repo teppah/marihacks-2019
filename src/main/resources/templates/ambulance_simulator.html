@@ -85,16 +85,17 @@
                             ctx.fillStyle = "#000000";
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
 
-                                if (currObj.currentCar.type === "car"){
-                                    ctx.fillStyle = "#0011ff";
-                                } else if (currObj.currentCar.type === "ervehicle") {
-                                    if (localCurrentER.uuid === 
+                            if (currObj.currentCar.type === "car") {
+                                ctx.fillStyle = "#0011ff";
+                            } else if (currObj.currentCar.type === "ervehicle") {
+                                if (currObj.currentCar.uuid === localCurrentER.uuid) {
                                     ctx.fillStyle = "#b200ff";
-
                                 } else {
                                     ctx.fillStyle = "#FF0000";
                                 }
-                            
+
+
+                            }
                         } else {
                             ctx.fillStyle = "#fff3db";
 
@@ -134,11 +135,11 @@
         let getNewER = function () {
             if (localCurrentER === null) {
                 $.get("api/get-new-ER", function (data, status) {
-                localCurrentER = data;
-                alert(`Got new ER vehicle: uuid is ${localCurrentER.uuid}`);
-                updateGrid(); 
-                $("#uuidField").innerHTML = data.uuid;
-            })
+                    localCurrentER = data;
+                    alert(`Got new ER vehicle: uuid is ${localCurrentER.uuid}`);
+                    updateGrid();
+                    $("#uuidField").innerHTML = data.uuid;
+                })
             } else {
                 alert(`you already have a ER vehicle with uuid ${localCurrentER.uuid}`)
             }

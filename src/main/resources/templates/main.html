@@ -81,20 +81,37 @@
                 for (let i = 0; i < 20; i++) {
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
+                        //building
                         if (currObj.type === "building") {
                             ctx.fillStyle = "#000000";
-                        } else if (currObj.type === "road" && currObj.currentCar != null) {
-                            if (currObj.currentCar.uuid === localCurrentCar.uuid) {
-                                // if car displayed is the local car
-                                ctx.fillStyle = "#7CFC00";
-                            } else {
+                            console.log("building")
+                        }
+                        // road
+                        else if (currObj.type === "road") {
+                            console.log("road");
 
-                                ctx.fillStyle = "#0011ff";
+                            // if its a car
+                            if (currObj.currentCar !== null) {
+                                if (currObj.currentCar.type === "car") {
+                                    if (currObj.currentCar.uuid === localCurrentCar.uuid) {
+                                        // if car displayed is the local car
+                                        console.log("current car");
+                                        ctx.fillStyle = "#7CFC00";
+                                    } else {
+                                        console.log("other car");
+                                        ctx.fillStyle = "#0011ff";
+                                    }
+                                }
+                                // if its an erv
+                                else if (currObj.currentCar.type === "ervehicle") {
+                                    console.log("ervehicle");
+                                    ctx.fillStyle = "#FF0000";
+
+                                }
+                            } else {
+                                console.log("nothing");
+                                ctx.fillStyle = "#fff3db"
                             }
-                        } else if (currObj.type === "road" && currObj.currentER != null) {
-                            ctx.fillStyle = "#FF0000";
-                        } else {
-                            ctx.fillStyle = "#fff3db";
 
                         }
                         ctx.fillRect(5 + j * 20, 5 + i * 20, 13, 13);
@@ -103,7 +120,8 @@
                     }
 
                 }
-            });
+
+            })
         };
 
         let resetGrid = function () {
