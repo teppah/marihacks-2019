@@ -2,8 +2,10 @@ package com.yfy.hx.lotsofcars.web;
 
 import com.yfy.hx.lotsofcars.core.AbstractEntity;
 import com.yfy.hx.lotsofcars.core.Car;
-import com.yfy.hx.lotsofcars.core.Grid;
 import com.yfy.hx.lotsofcars.core.ERvehicle;
+import com.yfy.hx.lotsofcars.core.Grid;
+import com.yfy.hx.lotsofcars.core.Road;
+import com.yfy.hx.lotsofcars.core.Building;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,20 @@ public class ApiController {
 
         return null;
     }
+
+
+//need to finish this
+    // @GetMapping("api/get-position")
+    // public AbstractEntity getPosition(@RequestParam String uuid) {
+        
+    //     if (uuid != null) {
+            
+
+    //         return grid.get();
+    //     }
+
+    //     return null;
+    // }
 
     @GetMapping("api/get-new-car")
     public Car getNewCar() {

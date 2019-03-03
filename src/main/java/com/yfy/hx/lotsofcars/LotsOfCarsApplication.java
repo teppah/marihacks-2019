@@ -31,17 +31,8 @@ public class LotsOfCarsApplication {
             }
         }
 
-        // randomly generate cars
-        grid = generateCars(grid, 10);
-
         return grid;
     }
-
-    // @Bean 
-    // public String[][] return_grid_orientation_LotsOfCarsApplication() {
-    //     OrientationGrid road_orientation = new OrientationGrid(20, 40);
-    //     return road_orientation.return_orientation_grid_complete(5);    
-    // }
 
     private AbstractEntity generateRandom(int i, int j) {
         double val = r.nextDouble();
@@ -50,9 +41,7 @@ public class LotsOfCarsApplication {
         if ((i%5)!=0 && (j%5)!=0){
             return new Building();
         } else {
-            String road_orientation = Road.return_road_orientation(j, i, 5);
-
-            Road road = new Road(road_orientation);
+            Road road = new Road();
 //            if (r.nextDouble() < 0.2) {
 //                road.currentCar = new Car(Car.Facing.NORTH);
 //                road.currentCar.facing = Car.Facing.NORTH;
@@ -60,20 +49,6 @@ public class LotsOfCarsApplication {
             return road;
         }
     }
-
-    private Grid generateCars(Grid grid, int number_of_random_cars){
-    /* Function that randomly generates cars
-    */
-
-        for(int iteration=0; iteration<number_of_random_cars; iteration++){
-            Car car = new Car();
-            car.uuid = new Random().nextInt() + "";
-            grid.addCar(car);            
-        }
-
-        return grid;
-    }
-
 
 
 }
