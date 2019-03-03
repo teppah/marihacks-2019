@@ -190,17 +190,45 @@
             }
         };
 
-        document.onload = updateGrid;
+        document.onload = function () {
+            updateGrid();
+        };
+
+        let reset = function () {
+            $.get("api/reset-grid", function(data){});
+            updateGrid();
+        };
+
+        let sentAlert = function () {
+            $.get("api/send-alert", function () {
+                console.log("sent an alert!");
+                alert("Alert sent");
+            })
+        };
+
+        let removeAlert = function () {
+            $.get("api/remove-alert", function () {
+                console.log("alert removed");
+                alert("Alert removed");
+            })
+        }
     </script>
     <h3>Id is: </h3>
     <h4 id="uuidField">placeholder</h4>
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
-    <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
+    <button class="btn btn-success" onclick="getNewER()">Add a new ervehicle</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
     <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
+    <button class="btn btn-danger" onclick="reset()">Reset</button>
+
+    <button class="btn btn-warning" onclick="sentAlert()">Send alert to cars</button>
+    <button class="btn btn-secondary" onclick="sentAlert()">Remove alert</button>
+
+
+
 
 
 </div>

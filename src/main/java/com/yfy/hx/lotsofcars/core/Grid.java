@@ -80,7 +80,17 @@ public class Grid {
                 }
             }
         }
+    }
 
+    public void reset() {
+        for (AbstractEntity[] e1: grid) {
+            for (AbstractEntity e: e1) {
+                if (e instanceof Road) {
+                    Road r = (Road) e;
+                    r.currentCar = null;
+                }
+            }
+        }
     }
 
 

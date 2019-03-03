@@ -22,6 +22,8 @@ import java.util.UUID;
 public class ApiController {
     private Grid grid;
 
+    boolean alerted = false;
+
     @Autowired
     public ApiController(Grid grid) {
         this.grid = grid;
@@ -125,6 +127,27 @@ public class ApiController {
         ervehicle.uuid = new Random().nextInt() + "";
         grid.addCar(ervehicle);
         return ervehicle;
+    }
+
+    @GetMapping("api/reset-grid")
+    public void resetGrid() {
+        grid.reset();
+        log.info("reset grid");
+    }
+
+    @GetMapping("api/send-alert")
+    public void sendAlert() {
+        this.alerted = true;
+    }
+
+    @GetMapping("api/reset-alert")
+    public void resetAlert() {
+        this.alerted = false;
+    }
+
+    @GetMapping("api/listen-alert")
+    public boolean isAlert() {
+        return alerted;
     }
 
 

@@ -86,23 +86,23 @@
                             ctx.fillStyle = "#fce3bf";
                             ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
-                            console.log("building")
+                            // console.log("building");
                         }
                         // road
                         else if (currObj.type === "road") {
-                            console.log("road");
+                            // console.log("road");
 
                             // if its a car
                             if (currObj.currentCar !== null) {
                                 if (currObj.currentCar.type === "car") {
                                     if (currObj.currentCar.uuid === localCurrentCar.uuid) {
                                         // if car displayed is the local car
-                                        console.log("current car");
+                                        // console.log("current car");
                                         ctx.fillStyle = "#7CFC00";
 	                                    ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
 
                                     } else {
-                                        console.log("other car");
+                                        // console.log("other car");
                                         ctx.fillStyle = "#0011ff";
                                         ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
 
@@ -110,14 +110,14 @@
                                 }
                                 // if its an erv
                                 else if (currObj.currentCar.type === "ervehicle") {
-                                    console.log("ervehicle");
+                                    // console.log("ervehicle");
                                     ctx.fillStyle = "#FF0000";
                                     ctx.fillRect(5 + j * 20 +2, 5 + i * 20 +2, 16, 16);
 
 
                                 }
                             } else {
-                                console.log("nothing");
+                                // console.log("nothing");
                                 ctx.fillStyle = "#fcfcfc"
                                 ctx.fillRect(5 + j * 20, 5 + i * 20, 20, 20);
 
@@ -216,18 +216,36 @@
                 alert("No car");
             }
         };
-        document.onload = updateGrid;
+        document.onload = function () {
+            updateGrid();
+        };
 
+        let reset = function () {
+            $.get("api/reset-grid", function(data){});
+            updateGrid();
+        };
+
+        setInterval(function(){
+            console.log("Listening for ambulance");
+            $.get("api/listen-alert", function(data){
+                if (data === true) {
+                    alert("Move out of the way! An ambulance is coming!")
+                }
+            })
+        }, 2500)
     </script>
     <h3>Id is: </h3>
     <h4 id="uuidField">placeholder</h4>
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
-    <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
+    <button class="btn btn-success" onclick="getNewCar()">Add a new car</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
     <button class="btn btn-primary" onclick="moveCarUp()">Move up</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move down</button>
+
+    <button class="btn btn-danger" onclick="reset()">Reset</button>
+
 
 
 </div>
