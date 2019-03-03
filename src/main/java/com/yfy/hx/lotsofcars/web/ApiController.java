@@ -26,6 +26,7 @@ public class ApiController {
 
     @GetMapping("api/grid")
     public AbstractEntity[][] getGrid() {
+        log.info("requested grid");
         return grid.grid;
     }
 
