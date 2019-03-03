@@ -32,9 +32,7 @@ public class Grid {
     public void addThing(AbstractEntity entity, int x, int y) {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("bro sumtins wrong: x = " + x + " and y = " + y);
-        }
-
-        else if (x >  gridWidth && y > gridHeight) {
+        } else if (x > gridWidth && y > gridHeight) {
             throw new IllegalArgumentException("Invalid x and y coord: x = " + x + " y = " + y);
         } else {
             entity.x = x;
@@ -46,16 +44,33 @@ public class Grid {
         }
     }
 
-    public AbstractEntity get(int x, int y){
+    public AbstractEntity get(int x, int y) {
         return grid[x][y];
     }
 
+<<<<<<< HEAD
     // public ArrayList getPosition(String uuid) {
 
     //     return []
     // }
 
 
+=======
+    public Car findCar(String uuid) {
+        for (AbstractEntity[] en1 : grid) {
+            for (AbstractEntity e: en1) {
+                if (e instanceof Car) {
+                    Car c = (Car) e;
+                    if (c.uuid.equals(uuid)) {
+                        return c;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+>>>>>>> 02b63a9de11f8faf59a392d0450874723da3b89b
 
     public void addCar(Car car) {
         while (true) {

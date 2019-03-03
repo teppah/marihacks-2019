@@ -6,25 +6,29 @@ import lombok.ToString;
 
 @ToString
 public class Car extends AbstractEntity {
-public String uuid;
+    public String uuid;
 
-public Facing facing;
+    public Facing facing;
 
-public Car() {
+    public Car() {
         super("car");
         facing = Facing.NORTH;
-        }
+    }
 
-public Car(Facing facing) {
+    public Car(String type) {
+        super(type);
+    }
+
+    public Car(Facing facing) {
         super("car");
         this.facing = facing;
-        }
+    }
 
-public enum Facing {
-    NORTH,
-    EAST,
-    WEST,
-    SOUTH
-}
+    public enum Facing {
+        NORTH,
+        EAST,
+        WEST,
+        SOUTH
+    }
 }
 
