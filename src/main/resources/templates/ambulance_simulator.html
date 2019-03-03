@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LoCal</title>
+    <title>Local</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-	<style type="text/css">
+    <style type="text/css">
 
-	* {
+        * {
 
-		font-family: Helvetica;
-	}
+            font-family: Helvetica;
+        }
 
-	#myCanvas{
-		border: .1px solid #d1d1d1;
-		margin-top:20px;
-		padding-left: 0;
-		padding-right: 0;
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-	}	
+        #myCanvas {
+            border: .1px solid #d1d1d1;
+            margin-top: 20px;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
 
-	#section1{
+        #content {
+            padding: 20px;
+        }
 
-		background-color: black;
+    </style>
 
-	}
+    <link rel="icon" href="Lots of Cars.png">
 
-	</style>
 
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="landing">LoCal</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="">About</a>
+            <a class="nav-item nav-link" href="Car">Car Simulator</a>
+            <a class="nav-item nav-link" href="ER">ER Simulator</a>
+        </div>
+    </div>
+</nav>
 
 <div id="content" align="center">
 
-    <h1>Personal Simulator</h1>
+    <h1>Overall Simulator</h1>
 
     <canvas id="myCanvas" width="1000px" height="500px">
 
@@ -46,27 +66,35 @@
     </canvas>
     <script type="text/javascript">
 
-        var canvas = document.getElementById('myCanvas');
-        var ctx = canvas.getContext("2d");
+        let localCurrentER = null;
 
-         var userid = '';
-
-
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext("2d");
 
 
         ctx.lineWidth = "0.5";
         ctx.strokeStyle = "#ffca60";
 
         // draws map
-        let getData = function() {
+        let getData = function () {
             $.get("api/grid", function (data, status) {
                 for (let i = 0; i < 20; i++) {
                     for (let j = 0; j < 40; j++) {
                         let currObj = data[j][i];
                         if (currObj.type === "building") {
-                            ctx.fillStyle = "#000e56";
+                            ctx.fillStyle = "#000000";
                         } else if (currObj.type === "road" && currObj.currentCar != null) {
-                            ctx.fillStyle = "#cc0022";
+
+                                if (currObj.currentCar.type === "car"){
+                                    ctx.fillStyle = "#0011ff";
+                                } else if (currObj.currentCar.type === "ervehicle") {
+                                    if (localCurrentER.uuid === 
+                                    ctx.fillStyle = "#b200ff";
+
+                                } else {
+                                    ctx.fillStyle = "#FF0000";
+                                }
+                            
                         } else {
                             ctx.fillStyle = "#fff3db";
 
@@ -80,56 +108,91 @@
             });
         };
 
-        let resetGrid = function() {
+        let resetGrid = function () {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         };
 
-        let updateGrid = function() {
+        let updateGrid = function () {
             resetGrid();
             getData();
         };
 
-        let getNewCar = function() {
-            $.get("api/get-new", function (data, status) {
-                updateGrid();
-                $("#uuidField").innerHTML = data.uuid;
+        let getNewCar = function () {
+            // if (localCurrentCar === null) {
+            //     $.get("api/get-new-car", function (data, status) {
+            //         localCurrentCar = data;
+            //         alert(`Got new car: uuid is ${localCurrentCar.uuid}`);
+            //         updateGrid();
+            //         $("#uuidField").innerHTML = data.uuid;
+            //     })
+            // } else {
+            //     alert(`you already have a car with uuid ${localCurrentCar.uuid}`)
+            // }
 
-            })
         };
 
+        let getNewER = function () {
+            if (localCurrentER === null) {
+                $.get("api/get-new-ER", function (data, status) {
+                localCurrentER = data;
+                alert(`Got new ER vehicle: uuid is ${localCurrentER.uuid}`);
+                updateGrid(); 
+                $("#uuidField").innerHTML = data.uuid;
+            })
+            } else {
+                alert(`you already have a ER vehicle with uuid ${localCurrentER.uuid}`)
+            }
+        };
 
         //Added functionality to move the car
 
-        let moveCarLeft = function() {
+        let moveCarLeft = function () {
+            if (localCurrentER !== null) {
+                $.get(`api/move-car?x=${localCurrentER.x}&y=${localCurrentER.y}&direction=left`, function (data) {
+                    localCurrentER = data;
+                    updateGrid();
+                });
 
-        	updateGrid();
-        }
-
-        let moveCarRight = function() {
-
-        	updateGrid();
-        }
-
-        let moveCarUp = function() {
-
-        	updateGrid();
-        }
-
-        let moveCarDown = function() {
-
-        	updateGrid();
-        }
-
-        let getPosition = function() {
-            $.get("api/get-position", function (data, status) {
-                updateGrid();
-                $("#uuidField").innerHTML = data.uuid;
-                userCar = data;
-            })
+            } else {
+                alert("No car");
+            }
         };
 
+        let moveCarRight = function () {
+            if (localCurrentER !== null) {
+                $.get(`api/move-car?x=${localCurrentER.x}&y=${localCurrentER.y}&direction=right`, function (data) {
+                    localCurrentER = data;
+                    updateGrid();
+                });
 
+            } else {
+                alert("No car");
+            }
+        };
 
+        let moveCarUp = function () {
+            if (localCurrentER !== null) {
+                $.get(`api/move-car?x=${localCurrentER.x}&y=${localCurrentER.y}&direction=up`, function (data) {
+                    localCurrentER = data;
+                    updateGrid();
+                });
+
+            } else {
+                alert("No car");
+            }
+        };
+
+        let moveCarDown = function () {
+            if (localCurrentER !== null) {
+                $.get(`api/move-car?x=${localCurrentER.x}&y=${localCurrentER.y}&direction=down`, function (data) {
+                    localCurrentER = data;
+                    updateGrid();
+                });
+
+            } else {
+                alert("No car");
+            }
+        };
 
     </script>
     <h3>Id is: </h3>
@@ -137,12 +200,14 @@
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
     <button class="btn btn-primary" onclick="getNewCar()">Add a new car</button>
+    <button class="btn btn-primary" onclick="getNewER()">Add a new ervehicle</button>
     <button class="btn btn-primary" onclick="moveCarLeft()">Move to the left</button>
     <button class="btn btn-primary" onclick="moveCarRight()">Move to the right</button>
     <button class="btn btn-primary" onclick="moveCarUp()">Move upwards</button>
     <button class="btn btn-primary" onclick="moveCarDown()">Move downwards</button>
-    
+
 
 </div>
+
 </body>
 </html>

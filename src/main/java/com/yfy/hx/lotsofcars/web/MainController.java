@@ -11,14 +11,14 @@ public class MainController  {
         return "landing";
     }
 
-    @GetMapping("home")
+    @GetMapping("Car")
     public String hello() {
         return "main";
     }
 
-    @GetMapping("landing")
+    @GetMapping("ER")
     public String landing() {
-        return "landing";
+        return "ambulance_simulator";
     }
 
     @GetMapping("layout")
