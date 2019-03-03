@@ -229,13 +229,23 @@
             console.log("Listening for ambulance");
             $.get("api/listen-alert", function(data){
                 if (data === true) {
-                    alert("Move out of the way! An ambulance is coming!")
+                    alert("Move out of the way! An ambulance is coming!");
+                    let elm = $("#clearLine");
+
+                    elm.text("Clear the center line!");
+                    elm.attr("style",'color:#FF0000');
+
+
+                } else {
+                    let elm = $("#clearLine");
+                    elm.text("No alerts.");
+                    elm.attr("style","");
                 }
             })
         }, 2500)
     </script>
-    <h3>Id is: </h3>
-    <h4 id="uuidField">placeholder</h4>
+    <h1 id="clearLine" class="text-bold hidden" style="color:#000000">No alerts.</h1>
+
     <button class="btn btn-primary" onclick="updateGrid()">Get Data</button>
     <button class="btn btn-primary" onclick="resetGrid()">Reset grid</button>
     <button class="btn btn-success" onclick="getNewCar()">Add a new car</button>
