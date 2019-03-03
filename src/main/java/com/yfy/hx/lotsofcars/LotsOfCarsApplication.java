@@ -50,7 +50,9 @@ public class LotsOfCarsApplication {
         if ((i%5)!=0 && (j%5)!=0){
             return new Building();
         } else {
-            Road road = new Road();
+            String road_orientation = Road.return_road_orientation(j, i, 5);
+
+            Road road = new Road(road_orientation);
 //            if (r.nextDouble() < 0.2) {
 //                road.currentCar = new Car(Car.Facing.NORTH);
 //                road.currentCar.facing = Car.Facing.NORTH;
